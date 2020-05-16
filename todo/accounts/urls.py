@@ -3,5 +3,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.UserListView.as_view(), name='index'),
+    path('signup/', views.SignUpView.as_view(), name='signup'), # 登録
 ]
