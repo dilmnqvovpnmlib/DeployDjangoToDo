@@ -25,7 +25,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         exho ${{ pwd }} 
-        pip install -r ../../requirements.txt
+        pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python  ../../todo/manage.py test
+        python ./todo/manage.py test
