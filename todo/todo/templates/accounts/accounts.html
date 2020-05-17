@@ -1,0 +1,12 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+  <div class="jumbotron">
+    <h1 class="display-4">ToDo管理アプリ</h1>
+    <p class="lead">
+      このアプリを使うことであなたのToDoを管理することができます。
+    </p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Login</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Signup</a>
+  </div>
+{% endblock %}

@@ -1,6 +1,81 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
+  <style>
+    body {
+      height: 100%;
+    }
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+
+    .form-signin .checkbox {
+      font-weight: 400;
+    }
+
+    .form-signin .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+  <body class="text-center">
+    <form class="form-signin" method="post" action="{% url 'login' %}">
+      <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      {% csrf_token %}
+
+      {% for item in form %}
+        <div class="form-group">
+          <input type="{{item.field.widget.input_type}}" class="form-control" name="{{item.name}}" id="{{item.id_for_label}}" placeholder="{{item.name}}">
+          {% for error in item.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+      <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+  </body>
+
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
   {% endif %}
@@ -12,22 +87,4 @@
       <p>Please login to see this page.</p>
     {% endif %}
   {% endif %}
-
-  <h3>Login</h3>
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-
-    <input type="submit" value="login"/>
-    <input type="hidden" name="next" value="{{ next }}"/>
-  </form>
 {% endblock %}
