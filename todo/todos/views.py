@@ -4,8 +4,37 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
-from .forms import TodoForm
-from .models import Todo
+from .forms import TagForm, TodoForm
+from .models import Tag, Todo
+
+
+class TagListView(LoginRequiredMixin, ListView):
+    model = Tag
+    context_object_name = 'tags'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(enable=True)
+        return queryset
+
+
+class TagCreateView(LoginRequiredMixin, CreateView):
+    model = Tag
+    context_object_name = 'tags'
+    form_class = TagForm
+    success_url = reverse_lazy('tag_list')
+
+
+class TagDeleteView(LoginRequiredMixin, DeleteView):
+    model = Tag
+    context_object_name = 'tags'
+    success_url = reverse_lazy('tag_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.enable = False
+        self.object.save()
+        return HttpResponseRedirect(self.success_url)
 
 
 class ToDoListView(LoginRequiredMixin, ListView):
