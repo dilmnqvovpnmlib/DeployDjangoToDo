@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header">
+        ToDo Detail
+      </div>
+      <div class="card-body text-center">
+        <form method='post'>
+          {% csrf_token %}
+          <table class="table mt-5s table-bordered text-left">
+            <thead>
+              <tr>
+                <th>ToDo</th>
+                <th>完了日時</th>
+                <th>作成者</th>
+                <th>タグ名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ todo.content }}</td>
+                <td>{{ todo.completed }}</td>
+                <td>{{ todo.user }}</td>
+                <td>
+                  {% for tag in todo.tags.all %}
+                    {{ tag }}
+                  {% endfor %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="#" class="btn btn-primary">編集</a>
+          <a href="{% url 'todo_delete' todo.pk  %}" class="btn btn-danger">削除</a>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

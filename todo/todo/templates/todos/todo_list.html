@@ -7,8 +7,9 @@
       <thead>
         <tr>
           <th>id</th>
-          <th>content</th>
-          <th>tag</th>
+          <th>ToDo</th>
+          <th>タグ名</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +21,11 @@
               {% for tag in todo.tags.all %}
                 {{ tag }}
               {% endfor %}
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary">
+                <a href="{% url 'todo_detail' todo.pk %}" style="color: white;">詳細</a>
+              </button>
             </td>
           </tr>
         {% endfor %}

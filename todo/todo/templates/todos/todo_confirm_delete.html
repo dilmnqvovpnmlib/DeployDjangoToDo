@@ -1,0 +1,22 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header">
+        確認画面
+      </div>
+      <div class="card-body text-center">
+        削除してもよろしいですか？
+        <hr class="my-4">
+        <form method="post">
+          {% csrf_token %}
+          <a type="submit" value="戻る" class="btn btn-primary" style="color: white;" href="{% url 'todo_list'  %}">
+            戻る
+          </a>
+          <input type="submit" value="削除する" class="btn btn-danger">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
