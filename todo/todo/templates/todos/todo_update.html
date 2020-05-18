@@ -1,0 +1,41 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+  <style>
+    ul {
+      list-style: none;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="card mt-5">
+        <div class="card-header">
+          ToDo編集画面
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="panel-body">
+              <table class="table">
+                <tr>
+                  <th>{{ form.content.label }}</th>
+                  <td>{{ form.content }}</td>
+                </tr>
+                <tr>
+                  <th>{{ form.tags.label }}</th>
+                  <td>{{ form.tags }}</td>
+                </tr>
+              </table>
+            </div>
+            <hr class="my-4">
+            <a type="submit" value="戻る" class="btn btn-primary" style="color: white;" href="{% url 'todo_list'  %}">
+              戻る
+            </a>
+            <button type="submit" class="btn btn-success">編集</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}

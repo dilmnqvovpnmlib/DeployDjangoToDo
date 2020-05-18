@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, ListView
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 
-from .models import Todo
 from .forms import TodoForm
+from .models import Todo
 
 
 class ToDoListView(LoginRequiredMixin, ListView):
@@ -42,6 +43,18 @@ class ToDoCreateView(LoginRequiredMixin, CreateView):
         kwargs['request'] = self.request
         return kwargs
 
+
+class ToDoUpdateView(LoginRequiredMixin, UpdateView):
+    model = Todo
+    context_object_name = 'todo'
+    form_class = TodoForm
+    template_name = 'todos/todo_update.html'
+    success_url = reverse_lazy('todo_list')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class ToDoDeleteView(LoginRequiredMixin, DeleteView):

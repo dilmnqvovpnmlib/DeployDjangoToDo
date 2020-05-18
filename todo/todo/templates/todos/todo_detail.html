@@ -31,7 +31,7 @@
               </tr>
             </tbody>
           </table>
-          <a href="#" class="btn btn-primary">編集</a>
+          <a href="{% url 'todo_update' todo.pk %}" class="btn btn-primary">編集</a>
           <a href="{% url 'todo_delete' todo.pk  %}" class="btn btn-danger">削除</a>
         </form>
       </div>
