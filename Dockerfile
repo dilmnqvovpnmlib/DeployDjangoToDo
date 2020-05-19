@@ -7,7 +7,8 @@ ENV PYTHONUNBUFFERED 1
 ENV TZ Asia/Tokyo
 
 RUN apt-get update
-RUN apt-get install -y nginx && apt-get install -y vim && apt-get install -y curl && apt-get install -y supervisor
+RUN apt-get install -y nginx && apt-get install -y vim && apt-get install -y curl && apt-get install -y supervisor && apt-get install -y mariadb-client
+
 
 RUN mkdir /app
 WORKDIR /app

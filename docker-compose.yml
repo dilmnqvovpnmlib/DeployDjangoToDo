@@ -13,7 +13,6 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       TZ: Asia/Tokyo
     volumes:
-      - ./initdb.d:/docker-entrypoint-initdb.d
       - ./data:/var/lib/mysql
       - ./conf/my.cnf:/etc/mysql/conf.d/my.cnf
     command: mysqld # --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -24,7 +23,10 @@ services:
     container_name: web
     ports:
       - "81:80"
-    links:
-      - db
+    # links:
+    #   - db
     depends_on:
       - db
+networks:
+  web:
+    driver: bridge
