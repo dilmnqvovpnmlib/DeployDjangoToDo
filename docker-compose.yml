@@ -8,8 +8,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       TZ: Asia/Tokyo
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
@@ -18,3 +19,12 @@ services:
     command: mysqld # --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - 3306:3306
+  web:
+    build: .
+    container_name: web
+    ports:
+      - "81:80"
+    links:
+      - db
+    depends_on:
+      - db
