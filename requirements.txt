@@ -2,3 +2,4 @@ django<3
 flake8
 isort
 ipython
+uwsgi
